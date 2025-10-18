@@ -101,7 +101,7 @@ pub fn render(f: &mut Frame, app: &App) -> () {
 
     let playlist_container = BlockContainer {
         title: "Playlists".into(),
-        focused: app.focus == AppFocus::playlist,
+        focused: app.focus == AppFocus::Playlist,
         elements: app
             .playlists
             .iter()
@@ -120,7 +120,7 @@ pub fn render(f: &mut Frame, app: &App) -> () {
 
     let track_container = BlockContainer {
         title: "Tracks".into(),
-        focused: app.focus == AppFocus::tracks,
+        focused: app.focus == AppFocus::Tracks,
         elements: app
             .playlists
             .iter()
@@ -137,17 +137,9 @@ pub fn render(f: &mut Frame, app: &App) -> () {
     };
     track_container.render(f, panes.tracks);
 
-    let now_playing_container = BlockContainer {
-        title: "Now Playing".into(),
-        focused: app.focus == AppFocus::now_playing,
-        elements: vec![],
-    };
-    now_playing_container.render(f, panes.now_playing);
+    let info_block = Block::default().title("Now Playing").borders(Borders::ALL);
+    f.render_widget(info_block, panes.now_playing);
 
-    let status_container = BlockContainer {
-        title: "Status".into(),
-        focused: app.focus == AppFocus::status,
-        elements: vec![],
-    };
-    status_container.render(f, panes.status);
+    let status_block = Block::default().title("Status").borders(Borders::ALL);
+    f.render_widget(status_block, panes.status);
 }

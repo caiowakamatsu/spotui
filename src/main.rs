@@ -25,8 +25,6 @@ fn main() -> io::Result<()> {
                 match key.code {
                     KeyCode::Char('q') => break,
                     KeyCode::Char('h') => app.focus_left(),
-                    KeyCode::Char('j') => app.focus_down(),
-                    KeyCode::Char('k') => app.focus_up(),
                     KeyCode::Char('l') => app.focus_right(),
                     _ => {}
                 }

@@ -15,10 +15,8 @@ pub struct Playlist {
 
 #[derive(Debug, PartialEq, Eq)]
 pub enum AppFocus {
-    playlist,
-    tracks,
-    now_playing,
-    status,
+    Playlist,
+    Tracks,
 }
 
 pub struct App {
@@ -56,40 +54,21 @@ impl App {
             playlists: playlists,
             selected_playlist: selected_playlist,
             selected_song: selected_song,
-            focus: AppFocus::playlist,
+            focus: AppFocus::Playlist,
         }
     }
 
     pub fn focus_right(&mut self) -> () {
         self.focus = match self.focus {
-            AppFocus::playlist => AppFocus::tracks,
-            AppFocus::tracks => AppFocus::now_playing,
-            AppFocus::now_playing => AppFocus::playlist,
-            AppFocus::status => AppFocus::status,
+            AppFocus::Playlist => AppFocus::Tracks,
+            AppFocus::Tracks => AppFocus::Playlist,
         }
     }
+
     pub fn focus_left(&mut self) -> () {
         self.focus = match self.focus {
-            AppFocus::playlist => AppFocus::now_playing,
-            AppFocus::tracks => AppFocus::playlist,
-            AppFocus::now_playing => AppFocus::tracks,
-            AppFocus::status => AppFocus::status,
-        }
-    }
-    pub fn focus_up(&mut self) -> () {
-        self.focus = match self.focus {
-            AppFocus::playlist => AppFocus::playlist,
-            AppFocus::tracks => AppFocus::tracks,
-            AppFocus::now_playing => AppFocus::now_playing,
-            AppFocus::status => AppFocus::playlist,
-        }
-    }
-    pub fn focus_down(&mut self) -> () {
-        self.focus = match self.focus {
-            AppFocus::playlist => AppFocus::status,
-            AppFocus::tracks => AppFocus::status,
-            AppFocus::now_playing => AppFocus::status,
-            AppFocus::status => AppFocus::playlist,
+            AppFocus::Playlist => AppFocus::Tracks,
+            AppFocus::Tracks => AppFocus::Playlist,
         }
     }
 }
